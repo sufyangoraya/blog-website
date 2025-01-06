@@ -10,7 +10,7 @@ import {
 import { Inter } from "next/font/google";
 import { draftMode } from "next/headers";
 
-import AlertBanner from "./alert-banner";
+// import AlertBanner from "./alert-banner";
 import PortableText from "./portable-text";
 
 import * as demo from "@/sanity/lib/demo";
@@ -18,6 +18,9 @@ import { sanityFetch } from "@/sanity/lib/fetch";
 import { settingsQuery } from "@/sanity/lib/queries";
 import { resolveOpenGraphImage } from "@/sanity/lib/utils";
 import Link from "next/link";
+import { ThemeProvider } from "../components/theme-provider";
+// import AlertBanner from "./alert-banner";
+import Navbar from "../components/Navbar";
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await sanityFetch({
@@ -69,8 +72,16 @@ export default async function RootLayout({
     <html lang="en" className={`${inter.variable} bg-white text-black`}>
       <body>
         <section className="min-h-screen">
-          <AlertBanner />
+        <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+          <Navbar />
+          {/* <AlertBanner /> */}
           <main>{children}</main>
+          </ThemeProvider>
           <footer className="bg-accent-1 border-accent-2 border-t">
             <div className="container mx-auto px-5">
               {footer.length > 0 ? (
