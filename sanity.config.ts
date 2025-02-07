@@ -25,11 +25,13 @@ const homeLocation = {
   title: "Home",
   href: "/",
 } satisfies DocumentLocation;
+ 
+
 
 export default defineConfig({
   basePath: studioUrl,
-  projectId,
-  dataset,
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ??"",
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET ??"", 
   schema: {
     types: [
       // Singletons
